@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Captain Pure — Pure Sip Mascot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&family=Bitter:ital,wght@1,700;1,800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --deep:#123C7E;
+    --blue:#1B52A8;
+    --mid:#2E6FD6;
+    --sky:#4F8DE8;
+    --light:#9CC6FF;
+    --pale:#CFE6FF;
+    --ink:#0E2A52;
+    --paper:#ffffff;
+    --wash:#f3f6fb;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--wash);
+    font-family:"Nunito",sans-serif;
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    display:flex;
+    justify-content:center;
+    padding:48px 24px 80px;
+  }
+  .sheet{
+    width:1320px;
+    max-width:100%;
+    background:var(--paper);
+    border-radius:28px;
+    box-shadow:0 40px 90px -50px rgba(18,60,126,.5);
+    overflow:hidden;
+  }
+
+  /* ---- top bar ---- */
+  .topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:26px 40px;
+    border-bottom:1px solid #e9eef6;
+  }
+  .topbar .tag{
+    font-family:"Fredoka",sans-serif;font-weight:600;
+    letter-spacing:.22em;text-transform:uppercase;
+    font-size:13px;color:var(--mid);
+  }
+  .topbar .sheetname{
+    font-family:"Nunito";font-weight:800;font-size:13px;
+    letter-spacing:.18em;text-transform:uppercase;color:#9bb0cf;
+  }
+
+  /* ---- hero ---- */
+  .hero{
+    position:relative;
+    display:grid;grid-template-columns:1.05fr .95fr;
+    gap:24px;align-items:center;
+    background:
+      radial-gradient(120% 120% at 78% 18%, #3e7ad6 0%, #1B52A8 45%, #123C7E 100%);
+    color:#fff;
+    padding:54px 56px;
+    overflow:hidden;
+  }
+  .hero .ripple{position:absolute;inset:0;opacity:.5;pointer-events:none;}
+  .hero-copy{position:relative;z-index:2;}
+  .eyebrow{
+    font-family:"Fredoka";font-weight:600;letter-spacing:.28em;
+    text-transform:uppercase;font-size:14px;color:var(--pale);
+    margin:0 0 14px;
+  }
+  .hero h1{
+    font-family:"Fredoka",sans-serif;font-weight:700;
+    font-size:96px;line-height:.92;margin:0;
+    letter-spacing:-.01em;
+    text-shadow:0 6px 0 rgba(8,28,60,.18);
+  }
+  .hero h1 .pure{display:block;color:#fff;}
+  .hero h1 .pure2{display:block;color:var(--light);}
+  .hero p.lede{
+    font-size:20px;line-height:1.5;max-width:430px;
+    color:#dce9ff;font-weight:600;margin:22px 0 28px;
+  }
+  .hero .chips{display:flex;gap:10px;flex-wrap:wrap;}
+  .chip{
+    font-family:"Fredoka";font-weight:500;font-size:14px;
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.3);
+    padding:8px 16px;border-radius:999px;color:#fff;
+    backdrop-filter:blur(2px);white-space:nowrap;
+  }
+  .hero-art{position:relative;z-index:2;display:flex;justify-content:center;align-items:center;}
+  .hero-art svg{width:430px;height:auto;filter:drop-shadow(0 30px 40px rgba(8,24,55,.4));}
+
+  /* ---- generic section ---- */
+  section.block{padding:46px 56px;border-bottom:1px solid #eef2f8;}
+  .block-head{display:flex;align-items:baseline;gap:14px;margin:0 0 30px;}
+  .block-head h2{
+    font-family:"Fredoka",sans-serif;font-weight:700;font-size:30px;
+    color:var(--deep);margin:0;letter-spacing:-.01em;
+  }
+  .block-head .num{
+    font-family:"Fredoka";font-weight:600;font-size:14px;
+    color:#fff;background:var(--mid);
+    width:30px;height:30px;border-radius:9px;
+    display:flex;align-items:center;justify-content:center;
+    letter-spacing:0;
+  }
+  .block-head .sub{font-size:15px;color:#7d92b3;font-weight:600;margin-left:auto;}
+
+  /* expressions */
+  .exp-row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .exp{
+    background:var(--wash);border:1px solid #e7eef8;border-radius:20px;
+    padding:22px 14px 16px;text-align:center;
+  }
+  .exp svg{width:130px;height:150px;}
+  .exp .lbl{font-family:"Fredoka";font-weight:600;font-size:15px;color:var(--blue);margin-top:6px;}
+
+  /* poses */
+  .pose-row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .pose{
+    border:1px solid #e7eef8;border-radius:20px;
+    padding:26px 14px 16px;text-align:center;
+    background:linear-gradient(180deg,#ffffff,#f6f9fe);
+  }
+  .pose svg{width:150px;height:200px;}
+  .pose .lbl{font-family:"Fredoka";font-weight:600;font-size:15px;color:var(--blue);margin-top:8px;}
+  .pose .lbl small{display:block;font-family:"Nunito";font-weight:600;font-size:12px;color:#90a4c2;letter-spacing:.02em;}
+
+  /* lockup + palette */
+  .duo{display:grid;grid-template-columns:1.25fr .75fr;gap:28px;align-items:stretch;}
+  .lockup{
+    background:#fff;border:1px solid #e7eef8;border-radius:20px;
+    padding:40px;display:flex;flex-direction:column;justify-content:center;gap:26px;
+  }
+  .lockup .logo{display:flex;align-items:center;gap:22px;}
+  .lockup .logo svg{width:120px;height:140px;flex:none;}
+  .logo-words{display:flex;flex-direction:column;}
+  .logo-words .name{font-family:"Bitter",serif;font-style:italic;font-weight:800;font-size:64px;color:var(--blue);line-height:.9;}
+  .logo-words .slogan{font-family:"Nunito";font-weight:800;letter-spacing:.34em;font-size:16px;color:var(--deep);margin-top:8px;text-transform:uppercase;}
+  .lockup .note{font-size:15px;color:#6f86a8;font-weight:600;line-height:1.5;border-top:1px dashed #d9e3f1;padding-top:20px;}
+  .lockup .note b{color:var(--blue);}
+
+  .palette{
+    background:var(--wash);border:1px solid #e7eef8;border-radius:20px;padding:28px;
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .palette h3{font-family:"Fredoka";font-weight:600;font-size:18px;margin:0 0 4px;color:var(--deep);}
+  .swatch{display:flex;align-items:center;gap:14px;}
+  .swatch .chipc{width:46px;height:46px;border-radius:12px;flex:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);}
+  .swatch .meta{display:flex;flex-direction:column;gap:2px;}
+  .swatch .meta b{font-family:"Fredoka";font-weight:600;font-size:14px;color:var(--ink);white-space:nowrap;line-height:1.1;}
+  .swatch .meta span{font-family:"Nunito";font-weight:700;font-size:12px;color:#90a4c2;letter-spacing:.04em;}
+
+  .foot{padding:24px 56px;display:flex;justify-content:space-between;align-items:center;}
+  .foot span{font-family:"Fredoka";font-weight:500;font-size:13px;color:#9bb0cf;letter-spacing:.04em;}
+
+  /* ---- motion ---- */
+  .motion-row{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .mcard{border:1px solid #e7eef8;border-radius:20px;padding:24px 14px 18px;text-align:center;background:linear-gradient(180deg,#ffffff,#f6f9fe);overflow:hidden;}
+  .mcard .stage{height:236px;display:flex;align-items:center;justify-content:center;}
+  .mcard .stage svg{width:172px;height:auto;}
+  .mcard .lbl{font-family:"Fredoka";font-weight:600;font-size:16px;color:var(--blue);margin-top:4px;}
+  .mcard .lbl small{display:block;font-family:"Nunito";font-weight:600;font-size:12px;color:#90a4c2;}
+  .hero-art svg{animation:floaty 4.8s ease-in-out infinite;}
+  .m-bounce .stage svg{animation:bouncey 1.7s cubic-bezier(.45,0,.5,1) infinite;transform-origin:50% 95%;}
+  .m-fly .stage svg{animation:flyfloat 3.4s ease-in-out infinite;}
+  .m-wave .stage svg{animation:sway 1.7s ease-in-out infinite;transform-origin:50% 92%;}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+  @keyframes bouncey{0%,55%,100%{transform:translateY(0) scaleY(1)}12%{transform:translateY(0) scaleY(.9) scaleX(1.06)}42%{transform:translateY(-54px) scaleY(1.05) scaleX(.97)}80%{transform:translateY(0) scaleY(.96) scaleX(1.04)}90%{transform:translateY(-12px)}}
+  @keyframes flyfloat{0%,100%{transform:translateY(8px) rotate(-5deg)}50%{transform:translateY(-18px) rotate(5deg)}}
+  @keyframes sway{0%,100%{transform:rotate(-9deg)}50%{transform:rotate(9deg)}}
+  @keyframes wavewater{from{transform:translateX(0)}to{transform:translateX(-60px)}}
+
+  /* ---- packaging ---- */
+  .pack-row{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:end;}
+  .pack{border:1px solid #e7eef8;border-radius:20px;padding:22px 16px 16px;text-align:center;background:linear-gradient(180deg,#ffffff,#f4f8fe);}
+  .pack .stage{position:relative;height:320px;display:flex;align-items:flex-end;justify-content:center;}
+  .pack .stage svg.bottle{height:300px;width:auto;filter:drop-shadow(0 22px 24px rgba(18,60,126,.16));}
+  .pack.flat .stage{align-items:center;}
+  .pack.flat .stage svg.bottle{height:auto;width:100%;}
+  .pack.span3{grid-column:1 / -1;}
+  .pack.span3 .stage{height:auto;padding:8px 0;}
+  .pack.span3 .stage svg.bottle{max-width:560px;margin:0 auto;}
+  .pack .mini{position:absolute;left:-14px;bottom:-4px;width:98px;height:auto;filter:drop-shadow(0 12px 14px rgba(18,60,126,.25));}
+  .pack .lbl{font-family:"Fredoka";font-weight:600;font-size:16px;color:var(--blue);margin-top:14px;}
+  .pack .lbl small{display:block;font-family:"Nunito";font-weight:600;font-size:12px;color:#90a4c2;}
+  .wavewater{animation:wavewater 2.4s linear infinite;}
+  .shine{animation:shineSweep 6.5s ease-in-out infinite;}
+  .shine2{animation:shineSweep 6.5s ease-in-out infinite;animation-delay:.45s;}
+  .wsurf{animation:waterbob 4s ease-in-out infinite;}
+  @keyframes shineSweep{
+    0%{transform:translateX(-160px);opacity:0}
+    10%{opacity:0}
+    22%{opacity:.85}
+    44%{transform:translateX(210px);opacity:.85}
+    54%{transform:translateX(210px);opacity:0}
+    100%{transform:translateX(210px);opacity:0}
+  }
+  @keyframes waterbob{0%,100%{transform:translateY(0)}50%{transform:translateY(2.5px)}}
+  @media (prefers-reduced-motion: reduce){*{animation:none !important;}}
+</style>
+</head>
+<body>
+  <div class="sheet" data-screen-label="Captain Pure brand sheet">
+
+    <div class="topbar">
+      <div class="tag">Pure Sip · Brand Mascot</div>
+      <div class="sheetname">Character Sheet — v1</div>
+    </div>
+
+    <!-- HERO -->
+    <div class="hero">
+      <svg class="ripple" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+      <div class="hero-copy">
+        <p class="eyebrow">Meet the hero of hydration</p>
+        <h1><span class="pure">Captain</span><span class="pure2">Pure</span></h1>
+        <p class="lede">Guardian of every clean, crisp drop. He keeps your water pure so you can simply <em>feel the purity.</em></p>
+        <div class="chips">
+          <span class="chip">100% Pure</span>
+          <span class="chip">Defender of Clean Water</span>
+          <span class="chip">Pure Sip Mascot</span>
+        </div>
+      </div>
+      <div class="hero-art" id="heroArt"></div>
+    </div>
+
+    <!-- EXPRESSIONS -->
+    <section class="block">
+      <div class="block-head">
+        <span class="num">01</span>
+        <h2>Expressions</h2>
+        <span class="sub">Same friendly drop, full range of mood</span>
+      </div>
+      <div class="exp-row" id="expRow"></div>
+    </section>
+
+    <!-- POSES -->
+    <section class="block">
+      <div class="block-head">
+        <span class="num">02</span>
+        <h2>Poses</h2>
+        <span class="sub">Drop body · two arms · no legs</span>
+      </div>
+      <div class="pose-row" id="poseRow"></div>
+    </section>
+
+    <!-- IN MOTION -->
+    <section class="block">
+      <div class="block-head">
+        <span class="num">03</span>
+        <h2>In motion</h2>
+        <span class="sub">Looping CSS — drop into web, no video file</span>
+      </div>
+      <div class="motion-row" id="motionRow"></div>
+    </section>
+
+    <!-- BOTTLES & PACKAGING -->
+    <section class="block">
+      <div class="block-head">
+        <span class="num">04</span>
+        <h2>Bottles &amp; packaging</h2>
+        <span class="sub">19 L jug + 500 ml bottle · real-glass render, light glints live</span>
+      </div>
+      <div class="pack-row" id="packRow"></div>
+    </section>
+
+    <!-- LOCKUP + PALETTE -->
+    <section class="block" style="border-bottom:none;">
+      <div class="block-head">
+        <span class="num">05</span>
+        <h2>Logo lockup &amp; palette</h2>
+        <span class="sub">How Captain Pure meets the brand</span>
+      </div>
+      <div class="duo">
+        <div class="lockup">
+          <div class="logo" id="logoLockup"></div>
+          <div class="note">Captain Pure is built from the Pure Sip drop mark — same silhouette, same sparkles, now with a face and arms. <b>Pair him beside the wordmark, never on top of it.</b></div>
+        </div>
+        <div class="palette" id="palette">
+          <h3>Palette</h3>
+        </div>
+      </div>
+    </section>
+
+    <div class="foot">
+      <span>Captain Pure™ · Pure Sip — Feel the Purity</span>
+      <span>Mascot character sheet</span>
+    </div>
+
+  </div>
+
+<script>
+/* ============================================================
+   Captain Pure — SVG mascot builder
+   Body coordinate space: viewBox "-50 -40 400 470"
+   Drop body: point at (150,18), round bottom circle center (150,238) r120
+   ============================================================ */
+let UID = 0;
+
+function defs(id){
+  return `
+  <defs>
+    <radialGradient id="body${id}" cx="36%" cy="28%" r="82%">
+      <stop offset="0%" stop-color="#bcd8ff"/>
+      <stop offset="26%" stop-color="#5b8fe4"/>
+      <stop offset="62%" stop-color="#2360c0"/>
+      <stop offset="100%" stop-color="#123C7E"/>
+    </radialGradient>
+    <linearGradient id="cape${id}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#86b8f7"/>
+      <stop offset="100%" stop-color="#3f7ad6"/>
+    </linearGradient>
+    <linearGradient id="arm${id}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3e78d8"/>
+      <stop offset="100%" stop-color="#1b4fa0"/>
+    </linearGradient>
+    <radialGradient id="cheek${id}" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff9fb0" stop-opacity=".9"/>
+      <stop offset="100%" stop-color="#ff9fb0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>`;
+}
+
+const SPARK = (x,y,s,fill="#fff",op=1)=>{
+  // 4-point concave star centered at x,y, radius s
+  const k=0.16*s;
+  return `<path opacity="${op}" fill="${fill}" d="M${x},${y-s}
+    C ${x+k},${y-k} ${x+k},${y-k} ${x+s},${y}
+    C ${x+k},${y+k} ${x+k},${y+k} ${x},${y+s}
+    C ${x-k},${y+k} ${x-k},${y+k} ${x-s},${y}
+    C ${x-k},${y-k} ${x-k},${y-k} ${x},${y-s} Z"/>`;
+};
+
+const BODY_PATH = `M150 18
+  C 196 104, 258 178, 268 226
+  A 120 120 0 1 1 32 226
+  C 42 178, 104 104, 150 18 Z`;
+
+function bodyGloss(id){
+  return `
+    <path d="${BODY_PATH}" fill="url(#body${id})"/>
+    <!-- big soft specular -->
+    <ellipse cx="108" cy="120" rx="42" ry="62" fill="#fff" opacity="0.20" transform="rotate(-22 108 120)"/>
+    <ellipse cx="96" cy="96" rx="15" ry="22" fill="#fff" opacity="0.55" transform="rotate(-22 96 96)"/>
+    <!-- bottom inner shadow for volume -->
+    <path d="M150 18 C 196 104, 258 178, 268 226 A 120 120 0 1 1 32 226 C 42 178, 104 104, 150 18 Z"
+       fill="none" stroke="#0e3370" stroke-opacity="0.18" stroke-width="10"/>`;
+}
+
+function chestEmblem(){
+  // white roundel with mini Pure Sip drop
+  return `
+    <g>
+      <circle cx="150" cy="262" r="30" fill="#fff" opacity=".95"/>
+      <circle cx="150" cy="262" r="30" fill="none" stroke="#0e3370" stroke-opacity=".08" stroke-width="3"/>
+      <path d="M150 244 C 159 258, 168 266, 168 274 a 18 18 0 1 1 -36 0 c 0 -8 9 -16 18 -30 Z" fill="#1B52A8"/>
+      <path d="M139 276 q 11 7 22 0" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </g>`;
+}
+
+/* ---------- faces ---------- */
+function face(kind){
+  const eyeW=`<circle cx="0" cy="0" r="0"/>`;
+  let eyes, mouth, brows="";
+  // default eye positions
+  const L=116,R=184,EY=176;
+  const eyeBall=(cx,hl=true)=>`
+     <ellipse cx="${cx}" cy="${EY}" rx="17" ry="20" fill="#fff"/>
+     <circle cx="${cx}" cy="${EY+3}" r="9" fill="#0E2A52"/>
+     ${hl?`<circle cx="${cx-3}" cy="${EY-2}" r="3.4" fill="#fff"/>`:''}`;
+  switch(kind){
+    case 'wink':
+      eyes = eyeBall(L) + `<path d="M${R-15} ${EY} q 15 -12 30 0" stroke="#0E2A52" stroke-width="6" fill="none" stroke-linecap="round"/>`;
+      mouth = `<path d="M126 214 q 24 26 48 0" stroke="#0E2A52" stroke-width="6.5" fill="#0E2A52" stroke-linecap="round"/>
+               <path d="M150 226 q 8 8 16 0" fill="#ff8095"/>`;
+      break;
+    case 'starry':
+      eyes = SPARK(L,EY,18,'#fff') + SPARK(R,EY,18,'#fff') + SPARK(L,EY,9,'#9CC6FF') + SPARK(R,EY,9,'#9CC6FF');
+      mouth = `<path d="M124 212 q 26 30 52 0 q -26 10 -52 0 Z" fill="#0E2A52"/>`;
+      break;
+    case 'cool':
+      // sunglasses
+      eyes = `<rect x="${L-22}" y="${EY-14}" width="40" height="26" rx="11" fill="#0E2A52"/>
+              <rect x="${R-18}" y="${EY-14}" width="40" height="26" rx="11" fill="#0E2A52"/>
+              <rect x="${L+18}" y="${EY-6}" width="${R-18-(L+18)}" height="5" rx="2.5" fill="#0E2A52"/>
+              <rect x="${L-16}" y="${EY-9}" width="12" height="5" rx="2.5" fill="#fff" opacity=".5"/>`;
+      mouth = `<path d="M128 214 q 22 16 44 0" stroke="#0E2A52" stroke-width="6.5" fill="none" stroke-linecap="round"/>`;
+      break;
+    case 'surprised':
+      eyes = `<ellipse cx="${L}" cy="${EY}" rx="16" ry="22" fill="#fff"/><circle cx="${L}" cy="${EY+4}" r="9" fill="#0E2A52"/>
+              <ellipse cx="${R}" cy="${EY}" rx="16" ry="22" fill="#fff"/><circle cx="${R}" cy="${EY+4}" r="9" fill="#0E2A52"/>`;
+      mouth = `<ellipse cx="150" cy="220" rx="13" ry="16" fill="#0E2A52"/>`;
+      break;
+    default: /* happy */
+      eyes = eyeBall(L) + eyeBall(R);
+      mouth = `<path d="M122 210 q 28 32 56 0 q -28 12 -56 0 Z" fill="#0E2A52"/>
+               <path d="M138 224 q 12 9 24 0" fill="#ff8095"/>`;
+  }
+  const cheeks = `<circle cx="100" cy="202" r="15" fill="url(#cheek0)"/><circle cx="200" cy="202" r="15" fill="url(#cheek0)"/>`;
+  // cheeks need per-instance gradient id; handled by replace later
+  return `<g class="face">${cheeks}${eyes}${mouth}</g>`;
+}
+
+/* ---------- arms (pose) ---------- */
+function arms(pose,id){
+  const A=(d)=>`<path d="${d}" fill="none" stroke="url(#arm${id})" stroke-width="30" stroke-linecap="round"/>`;
+  const glove=(x,y)=>`<circle cx="${x}" cy="${y}" r="19" fill="#fff"/><circle cx="${x}" cy="${y}" r="19" fill="none" stroke="#0e3370" stroke-opacity=".08" stroke-width="3"/>`;
+  switch(pose){
+    case 'fly':
+      return A(`M82 206 Q 52 150 58 96`) + A(`M222 214 Q 270 252 250 304`)
+           + glove(58,90) + glove(248,308);
+    case 'wave':
+      return A(`M80 204 Q 52 150 80 108`) + A(`M226 214 Q 256 262 232 306`)
+           + glove(82,102) + glove(230,309);
+    case 'flex':
+      return A(`M78 214 Q 30 198 48 150 Q 58 120 98 132`) + A(`M222 214 Q 270 198 252 150 Q 242 120 202 132`)
+           + glove(100,128) + glove(200,128);
+    case 'none':
+      return A(`M74 212 Q 48 250 70 300`) + A(`M226 212 Q 252 250 230 300`)
+           + glove(72,304) + glove(228,304);
+    default: /* hips */
+      return A(`M72 210 Q 16 236 24 272 Q 30 302 78 298`) + A(`M228 210 Q 284 236 276 272 Q 270 302 222 298`)
+           + glove(80,300) + glove(220,300);
+  }
+}
+
+/* ---------- cape (wide billowing cape behind the drop) ---------- */
+function cape(id){
+  const d = `M150 138
+    C 104 142, 50 178, 14 250
+    C 2 278, 2 308, 16 340
+    C 30 328, 46 336, 56 358
+    C 78 338, 104 348, 126 360
+    C 134 364, 142 364, 150 362
+    C 158 364, 166 364, 174 360
+    C 196 348, 222 338, 244 358
+    C 254 336, 270 328, 284 340
+    C 298 308, 298 278, 286 250
+    C 250 178, 196 142, 150 138 Z`;
+  return `<g>
+    <path d="${d}" fill="url(#cape${id})"/>
+    <path d="${d}" fill="none" stroke="#1a4ea2" stroke-opacity=".3" stroke-width="3"/>
+    <!-- center fold + side shading -->
+    <path d="M150 140 C 146 220, 150 300, 150 360" fill="none" stroke="#2f6cc9" stroke-opacity=".4" stroke-width="4"/>
+    <path d="M70 360 C 60 320, 40 290, 18 260" fill="none" stroke="#2f6cc9" stroke-opacity=".3" stroke-width="3"/>
+    <path d="M230 360 C 240 320, 260 290, 282 260" fill="none" stroke="#2f6cc9" stroke-opacity=".3" stroke-width="3"/>
+    <!-- collar clasp -->
+    <path d="M130 150 q 20 -18 40 0 q -20 11 -40 0 Z" fill="#fff" opacity=".92"/>
+  </g>`;
+}
+
+/* ---------- full mascot ---------- */
+function mascot({pose='hips',expr='happy',emblem=true,cape:withCape=true,sparkles=true}={}){
+  const id=UID++;
+  let f=face(expr).replaceAll('url(#cheek0)',`url(#cheek${id})`);
+  const spk = sparkles ? `${SPARK(40,70,18,'#bcd8ff')}${SPARK(262,52,22,'#bcd8ff')}${SPARK(286,150,12,'#bcd8ff')}${SPARK(18,150,11,'#bcd8ff')}` : '';
+  return `<svg viewBox="-50 -40 400 470" xmlns="http://www.w3.org/2000/svg">
+    ${defs(id)}
+    ${spk}
+    ${withCape?cape(id):''}
+    ${bodyGloss(id)}
+    ${arms(pose,id)}
+    ${f}
+    ${emblem?chestEmblem():''}
+  </svg>`;
+}
+
+/* head-only (for expressions) — crop to face area */
+function head(expr){
+  const id=UID++;
+  let f=face(expr).replaceAll('url(#cheek0)',`url(#cheek${id})`);
+  return `<svg viewBox="0 0 300 320" xmlns="http://www.w3.org/2000/svg">
+    ${defs(id)}
+    ${SPARK(36,64,14,'#bcd8ff')}${SPARK(266,58,16,'#bcd8ff')}
+    ${bodyGloss(id)}
+    ${f}
+  </svg>`;
+}
+
+/* ---------- Pure Sip logo mark recreation ---------- */
+function logoMark(){
+  const id='LOGO';
+  return `<svg viewBox="-30 -40 360 430" xmlns="http://www.w3.org/2000/svg">
+    <defs></defs>
+    ${SPARK(70,12,20,'#1B52A8')}${SPARK(150,2,28,'#1B52A8')}${SPARK(206,70,15,'#1B52A8')}${SPARK(20,70,12,'#1B52A8')}
+    <path d="${BODY_PATH}" fill="#1B52A8"/>
+    <!-- swimmer + wave (white) -->
+    <circle cx="118" cy="206" r="15" fill="#fff"/>
+    <path d="M70 250 C 110 214, 150 232, 150 232 C 120 240, 104 262, 96 286 C 80 270, 66 262, 70 250 Z" fill="#fff"/>
+    <path d="M58 286 C 110 262, 150 296, 246 262 C 220 300, 150 320, 92 300 C 78 296, 66 294, 58 286 Z" fill="#fff"/>
+    <path d="M84 300 C 140 320, 200 300, 240 282" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round"/>
+  </svg>`;
+}
+
+/* ---------- realistic 19 L standard jug ---------- */
+function jug19(){
+  const id='J'+(UID++);
+  const P=`M130 36 L170 36 L170 90
+    C 198 96 228 116 240 162 C 248 180 250 194 250 210
+    L250 242 C 250 250 244 254 236 256 C 244 260 250 262 250 270
+    L250 344 C 250 352 244 356 236 358 C 244 362 250 364 250 372
+    L250 412 C 250 432 238 444 210 448 C 180 453 120 453 90 448
+    C 62 444 50 432 50 412 L50 372 C 50 364 56 362 64 358
+    C 56 356 50 352 50 344 L50 270 C 50 262 56 260 64 256
+    C 56 254 50 250 50 242 L50 210 C 50 194 52 180 60 162
+    C 72 116 102 96 130 90 Z`;
+  return `<svg class="bottle" viewBox="0 0 300 470" xmlns="http://www.w3.org/2000/svg">
+   <defs>
+     <clipPath id="clip${id}"><path d="${P}"/></clipPath>
+     <linearGradient id="glass${id}" x1="0" y1="0" x2="1" y2="0">
+       <stop offset="0%" stop-color="#a9cfe8"/>
+       <stop offset="9%" stop-color="#ffffff"/>
+       <stop offset="27%" stop-color="#e7f4fc"/>
+       <stop offset="52%" stop-color="#d2eaf7"/>
+       <stop offset="73%" stop-color="#c0def2"/>
+       <stop offset="90%" stop-color="#a6cfeb"/>
+       <stop offset="100%" stop-color="#7aaed9"/>
+     </linearGradient>
+     <linearGradient id="water${id}" gradientUnits="userSpaceOnUse" x1="0" y1="150" x2="0" y2="448">
+       <stop offset="0%" stop-color="#a9d4f0" stop-opacity=".10"/>
+       <stop offset="100%" stop-color="#6fb0e0" stop-opacity=".42"/>
+     </linearGradient>
+     <linearGradient id="sh${id}" x1="0" y1="0" x2="1" y2="0">
+       <stop offset="0%" stop-color="#fff" stop-opacity="0"/>
+       <stop offset="50%" stop-color="#fff" stop-opacity=".5"/>
+       <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+     </linearGradient>
+     <filter id="frost${id}" x="-20%" y="-20%" width="140%" height="140%">
+       <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="2" seed="9" result="t"/>
+       <feColorMatrix in="t" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1.25 -0.42"/>
+     </filter>
+   </defs>
+   <path d="${P}" fill="url(#glass${id})"/>
+   <g clip-path="url(#clip${id})">
+     <rect x="40" y="150" width="220" height="320" fill="url(#water${id})"/>
+     <!-- frosted bands: shoulder corners + grooves + base ring -->
+     <rect x="40" y="196" width="220" height="22" filter="url(#frost${id})" opacity=".7"/>
+     <rect x="40" y="244" width="220" height="20" filter="url(#frost${id})" opacity=".5"/>
+     <rect x="40" y="346" width="220" height="20" filter="url(#frost${id})" opacity=".5"/>
+     <rect x="40" y="406" width="220" height="46" filter="url(#frost${id})" opacity=".88"/>
+     <!-- soft volume + highlights -->
+     <rect x="226" y="150" width="26" height="280" fill="#7fb2dd" opacity=".16"/>
+     <rect x="80" y="120" width="22" height="300" rx="11" fill="#ffffff" opacity=".4"/>
+     <rect x="73" y="120" width="7" height="300" rx="3.5" fill="#ffffff" opacity=".7"/>
+     <!-- water surface meniscus -->
+     <g class="wsurf"><ellipse cx="150" cy="150" rx="98" ry="7" fill="#ffffff" opacity=".35"/></g>
+     <!-- shine sweeps -->
+     <g class="shine"><rect x="78" y="70" width="48" height="420" fill="url(#sh${id})" transform="rotate(9 150 250)"/></g>
+     <g class="shine2"><rect x="150" y="70" width="26" height="420" fill="url(#sh${id})" transform="rotate(9 150 250)"/></g>
+   </g>
+   <!-- neck: open mouth + thread ring + collar -->
+   <ellipse cx="150" cy="37" rx="20" ry="6" fill="#a9cfe8"/>
+   <ellipse cx="150" cy="37" rx="13" ry="4" fill="#7fa9cd"/>
+   <path d="M129 48 h42 M129 58 h42 M129 68 h42 M129 78 h42" stroke="#9cc6e6" stroke-width="3.5" opacity=".55" fill="none"/>
+   <ellipse cx="150" cy="90" rx="24" ry="6" fill="#bcdcf2" opacity=".8"/>
+   <!-- outline -->
+   <path d="${P}" fill="none" stroke="#86b6db" stroke-width="2.5"/>
+   <!-- printed brand (screen-print look) -->
+   <g opacity=".9">
+     <path d="M150 268 C 156 278, 164 284, 164 290 a 14 14 0 1 1 -28 0 c 0 -6 8 -12 14 -22 Z" fill="#1B52A8"/>
+     <path d="M141 292 q 9 6 18 0" stroke="#bcdcf2" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+     <text x="150" y="324" text-anchor="middle" style="font-family:'Bitter',serif;font-style:italic;font-weight:800;font-size:27px;fill:#1B52A8;">Pure Sip</text>
+     <text x="150" y="344" text-anchor="middle" style="font-family:'Fredoka',sans-serif;font-weight:700;font-size:14px;letter-spacing:2px;fill:#1B52A8;">19 LITRES</text>
+   </g>
+  </svg>`;
+}
+
+/* ---------- realistic 500 ml PET bottle ---------- */
+function bottle500(){
+  const id='F'+(UID++);
+  const P=`M84 94 L116 94 L118 116
+    C 146 126 160 150 160 184 L160 300
+    C 160 312 154 316 154 330 C 154 344 160 348 160 360
+    L160 392 C 160 422 148 448 128 454
+    C 118 457 82 457 72 454 C 52 448 40 422 40 392
+    L40 360 C 40 348 46 344 46 330 C 46 316 40 312 40 300
+    L40 184 C 40 150 54 126 82 116 Z`;
+  return `<svg class="bottle" viewBox="0 0 200 480" xmlns="http://www.w3.org/2000/svg">
+   <defs>
+     <clipPath id="clip${id}"><path d="${P}"/></clipPath>
+     <linearGradient id="glass${id}" x1="0" y1="0" x2="1" y2="0">
+       <stop offset="0%" stop-color="#a9cfe8"/>
+       <stop offset="10%" stop-color="#ffffff"/>
+       <stop offset="30%" stop-color="#e9f4fc"/>
+       <stop offset="55%" stop-color="#d6ecf8"/>
+       <stop offset="80%" stop-color="#bcdcf2"/>
+       <stop offset="100%" stop-color="#7aaed9"/>
+     </linearGradient>
+     <linearGradient id="lab${id}" x1="0" y1="0" x2="1" y2="0">
+       <stop offset="0%" stop-color="#173f86"/>
+       <stop offset="22%" stop-color="#1f5fc0"/>
+       <stop offset="55%" stop-color="#1B52A8"/>
+       <stop offset="100%" stop-color="#143c80"/>
+     </linearGradient>
+     <linearGradient id="sh${id}" x1="0" y1="0" x2="1" y2="0">
+       <stop offset="0%" stop-color="#fff" stop-opacity="0"/>
+       <stop offset="50%" stop-color="#fff" stop-opacity=".5"/>
+       <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+     </linearGradient>
+   </defs>
+   <!-- cap -->
+   <rect x="78" y="40" width="44" height="40" rx="7" fill="#1B52A8"/>
+   <rect x="78" y="40" width="44" height="40" rx="7" fill="none" stroke="#143c80" stroke-width="1.5"/>
+   <path d="M84 44 v32 M92 42 v36 M100 42 v36 M108 42 v36 M116 44 v32" stroke="#3c74cf" stroke-width="2" opacity=".7"/>
+   <rect x="80" y="80" width="40" height="12" rx="3" fill="#2a62bd"/>
+   <!-- body glass -->
+   <path d="${P}" fill="url(#glass${id})"/>
+   <g clip-path="url(#clip${id})">
+     <rect x="36" y="100" width="128" height="380" fill="#bfe0f5" opacity=".22"/>
+     <!-- grip ribs near base -->
+     <path d="M40 340 h120 M40 352 h120 M40 364 h120 M40 376 h120" stroke="#86b6db" stroke-width="3" opacity=".5" fill="none"/>
+     <!-- soft volume -->
+     <rect x="138" y="100" width="22" height="360" fill="#7aaed9" opacity=".18"/>
+     <rect x="56" y="100" width="16" height="360" rx="8" fill="#ffffff" opacity=".42"/>
+     <rect x="50" y="100" width="6" height="360" rx="3" fill="#ffffff" opacity=".7"/>
+     <!-- condensation droplets -->
+     <circle cx="120" cy="150" r="3.2" fill="#ffffff" opacity=".55"/>
+     <circle cx="132" cy="180" r="2.2" fill="#ffffff" opacity=".5"/>
+     <circle cx="64" cy="200" r="2.6" fill="#ffffff" opacity=".5"/>
+     <circle cx="126" cy="330" r="2.8" fill="#ffffff" opacity=".5"/>
+     <circle cx="70" cy="410" r="3" fill="#ffffff" opacity=".5"/>
+     <!-- LABEL wrap -->
+     <g>
+       <rect x="36" y="206" width="128" height="104" fill="url(#lab${id})"/>
+       <path d="M36 218 q 32 -12 64 0 t 64 0 l0 14 q -32 12 -64 0 t -64 0 Z" fill="#ffffff" opacity=".9"/>
+       <path d="M36 296 q 32 12 64 0 t 64 0 l0 14 l-128 0 Z" fill="#3c74cf" opacity=".55"/>
+       <rect x="36" y="206" width="14" height="104" fill="#0e2f63" opacity=".28"/>
+       <rect x="150" y="206" width="14" height="104" fill="#0e2f63" opacity=".28"/>
+     </g>
+     <!-- shine -->
+     <g class="shine"><rect x="50" y="60" width="34" height="420" fill="url(#sh${id})" transform="rotate(8 100 260)"/></g>
+     <g class="shine2"><rect x="100" y="60" width="18" height="420" fill="url(#sh${id})" transform="rotate(8 100 260)"/></g>
+   </g>
+   <!-- label print (over everything, within label area) -->
+   <path d="M100 234 C 104 241, 109 245, 109 249 a 9 9 0 1 1 -18 0 c 0 -4 5 -8 9 -15 Z" fill="#ffffff"/>
+   <text x="100" y="276" text-anchor="middle" style="font-family:'Bitter',serif;font-style:italic;font-weight:800;font-size:24px;fill:#ffffff;">Pure Sip</text>
+   <text x="100" y="291" text-anchor="middle" style="font-family:'Nunito',sans-serif;font-weight:800;font-size:7px;letter-spacing:2.5px;fill:#bcd8ff;">FEEL THE PURITY</text>
+   <text x="100" y="305" text-anchor="middle" style="font-family:'Fredoka',sans-serif;font-weight:600;font-size:11px;fill:#ffffff;">500 ml</text>
+   <!-- outline -->
+   <path d="${P}" fill="none" stroke="#86b6db" stroke-width="2"/>
+  </svg>`;
+}
+
+/* ---------- top-load water dispenser ---------- */
+function dispenser(){
+  const id='D'+(UID++);
+  const lg = logoMark().replace('<svg ','<svg x="92" y="356" width="30" height="36" ');
+  return `<svg class="bottle" viewBox="0 0 260 470" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="dw${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfe6f5"/><stop offset="1" stop-color="#8fc0e6"/></linearGradient>
+      <linearGradient id="cab${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e7eef8"/></linearGradient>
+    </defs>
+    <!-- inverted 19L jug -->
+    <path d="M104 152 L104 132 C 104 120 92 118 92 96 C 92 44 104 26 130 26 C 156 26 168 44 168 96 C 168 118 156 120 156 132 L156 152 Z" fill="url(#dw${id})"/>
+    <ellipse cx="112" cy="60" rx="9" ry="20" fill="#ffffff" opacity=".25"/>
+    <rect x="98" y="74" width="64" height="30" rx="6" fill="#ffffff" opacity=".95"/>
+    <text x="130" y="95" text-anchor="middle" style="font-family:'Bitter',serif;font-style:italic;font-weight:800;font-size:18px;fill:#1B52A8;">Pure Sip</text>
+    <!-- collar -->
+    <rect x="84" y="146" width="92" height="18" rx="6" fill="#cdd9ea"/>
+    <!-- cabinet -->
+    <rect x="70" y="160" width="120" height="298" rx="18" fill="url(#cab${id})" stroke="#d2dcea" stroke-width="2"/>
+    <!-- dispense recess -->
+    <rect x="86" y="250" width="88" height="92" rx="10" fill="#eef3fa"/>
+    <!-- taps -->
+    <rect x="104" y="244" width="20" height="14" rx="4" fill="#2E6FD6"/>
+    <rect x="110" y="258" width="8" height="16" rx="3" fill="#2E6FD6"/>
+    <rect x="136" y="244" width="20" height="14" rx="4" fill="#d9534f"/>
+    <rect x="142" y="258" width="8" height="16" rx="3" fill="#d9534f"/>
+    <!-- drip tray -->
+    <rect x="98" y="322" width="64" height="12" rx="3" fill="#cdd9ea"/>
+    <line x1="106" y1="322" x2="106" y2="334" stroke="#aebed6" stroke-width="2"/>
+    <line x1="122" y1="322" x2="122" y2="334" stroke="#aebed6" stroke-width="2"/>
+    <line x1="138" y1="322" x2="138" y2="334" stroke="#aebed6" stroke-width="2"/>
+    <line x1="154" y1="322" x2="154" y2="334" stroke="#aebed6" stroke-width="2"/>
+    <!-- brand -->
+    ${lg}
+    <text x="128" y="388" style="font-family:'Bitter',serif;font-style:italic;font-weight:800;font-size:22px;fill:#1B52A8;">Pure Sip</text>
+    <!-- feet -->
+    <rect x="78" y="458" width="20" height="10" rx="3" fill="#cdd9ea"/>
+    <rect x="162" y="458" width="20" height="10" rx="3" fill="#cdd9ea"/>
+  </svg>`;
+}
+
+/* ---------- flat label artwork (the print wrap) ---------- */
+function labelArt(){
+  const m = mascot({pose:'wave',expr:'happy'}).replace('<svg ','<svg x="8" y="22" width="148" height="174" preserveAspectRatio="xMidYMid meet" ');
+  const lg = logoMark().replace('<svg ','<svg x="168" y="30" width="62" height="74" ');
+  return `<svg class="bottle" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" style="height:auto;width:100%;">
+    <rect x="6" y="6" width="388" height="228" rx="22" fill="#ffffff" stroke="#1B52A8" stroke-width="3"/>
+    <rect x="16" y="16" width="368" height="208" rx="16" fill="none" stroke="#cfe0f6" stroke-width="2"/>
+    ${SPARK(40,28,12,'#9CC6FF')}${SPARK(372,212,14,'#9CC6FF')}
+    ${m}
+    ${lg}
+    <text x="240" y="84" style="font-family:'Bitter',serif;font-style:italic;font-weight:800;font-size:38px;fill:#1B52A8;">Pure Sip</text>
+    <text x="242" y="108" style="font-family:'Nunito',sans-serif;font-weight:800;font-size:11px;letter-spacing:4px;fill:#2E6FD6;">FEEL THE PURITY</text>
+    <line x1="170" y1="126" x2="300" y2="126" stroke="#e3ebf6" stroke-width="2"/>
+    <text x="170" y="152" style="font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;fill:#7d92b3;">Natural Drinking Water</text>
+    <text x="170" y="174" style="font-family:'Nunito',sans-serif;font-weight:700;font-size:11px;fill:#9bb0cf;">Guardian of Purity</text>
+    <text x="170" y="196" style="font-family:'Nunito',sans-serif;font-weight:700;font-size:10px;letter-spacing:1px;fill:#aebacc;">NET · 19 LITRES</text>
+    <circle cx="350" cy="172" r="40" fill="#1B52A8"/>
+    <text x="350" y="170" text-anchor="middle" style="font-family:'Fredoka',sans-serif;font-weight:700;font-size:28px;fill:#ffffff;">19 L</text>
+    <text x="350" y="190" text-anchor="middle" style="font-family:'Nunito',sans-serif;font-weight:800;font-size:8px;letter-spacing:2px;fill:#9CC6FF;">STANDARD</text>
+  </svg>`;
+}
+
+/* ===================== render ===================== */
+document.getElementById('heroArt').innerHTML = mascot({pose:'hips',expr:'happy'});
+
+const expData=[['happy','Happy'],['wink','Wink'],['starry','Sparkle'],['cool','Cool']];
+document.getElementById('expRow').innerHTML = expData.map(([k,l])=>
+  `<div class="exp">${head(k)}<div class="lbl">${l}</div></div>`).join('');
+
+const poseData=[
+  ['hips','Hero stance','hands on hips'],
+  ['fly','Flying','to the rescue'],
+  ['wave','Wave','stay hydrated!'],
+  ['flex','Flex','strong &amp; pure']
+];
+document.getElementById('poseRow').innerHTML = poseData.map(([p,l,s])=>
+  `<div class="pose">${mascot({pose:p,expr:p==='flex'?'cool':'happy'})}<div class="lbl">${l}<small>${s}</small></div></div>`).join('');
+
+/* in motion */
+const motionData=[
+  ['m-bounce','hips','happy','Bounce','full of energy'],
+  ['m-fly','fly','happy','Float &amp; fly','to the rescue'],
+  ['m-wave','wave','happy','Wave','hello there!']
+];
+document.getElementById('motionRow').innerHTML = motionData.map(([cls,p,e,l,s])=>
+  `<div class="mcard ${cls}"><div class="stage">${mascot({pose:p,expr:e})}</div><div class="lbl">${l}<small>${s}</small></div></div>`).join('');
+
+/* packaging */
+document.getElementById('packRow').innerHTML =
+  `<div class="pack"><div class="stage">${jug19()}<div class="mini">${mascot({pose:'wave',expr:'happy'})}</div></div><div class="lbl">19 L Jug<small>standard cooler bottle</small></div></div>`
+ +`<div class="pack"><div class="stage">${bottle500()}</div><div class="lbl">500 ml Bottle<small>PET · branded label</small></div></div>`
+ +`<div class="pack"><div class="stage">${dispenser()}<div class="mini">${mascot({pose:'hips',expr:'happy'})}</div></div><div class="lbl">Water Dispenser<small>hot &amp; cold cooler</small></div></div>`
+ +`<div class="pack flat span3"><div class="stage">${labelArt()}</div><div class="lbl">Label Artwork<small>print wrap · flat</small></div></div>`;
+
+document.getElementById('logoLockup').innerHTML =
+  `${logoMark()}<div class="logo-words"><span class="name">Pure Sip</span><span class="slogan">Feel the Purity</span></div>`;
+
+/* hero ripples */
+(function(){
+  const r=document.querySelector('.hero .ripple');
+  let s='';
+  for(let i=0;i<5;i++){s+=`<circle cx="940" cy="120" r="${90+i*70}" fill="none" stroke="#fff" stroke-opacity="${.12-i*.018}" stroke-width="2"/>`;}
+  s+=SPARK(150,440,26,'#ffffff',.5)+SPARK(1080,440,30,'#ffffff',.45)+SPARK(1130,200,16,'#ffffff',.5)+SPARK(60,260,18,'#fff',.4);
+  r.innerHTML=s;
+})();
+
+/* palette */
+const pal=[['Deep Blue','#123C7E'],['Pure Blue','#1B52A8'],['Mid Blue','#2E6FD6'],['Sky','#4F8DE8'],['Light','#9CC6FF'],['Paper','#FFFFFF']];
+document.getElementById('palette').insertAdjacentHTML('beforeend',
+  pal.map(([n,h])=>`<div class="swatch"><div class="chipc" style="background:${h}"></div><div class="meta"><b>${n}</b><span>${h}</span></div></div>`).join(''));
+</script>
+</body>
+</html>

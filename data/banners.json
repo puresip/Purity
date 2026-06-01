@@ -1,0 +1,42 @@
+{
+  "settings": {
+    "rotateSeconds": 5,
+    "topBarEnabled": true,
+    "topBarText": "💧 FREE Delivery in Bahria Town \n🔥 FREE! FREE! FREE! 3 Refills FREE\n"
+  },
+  "banners": [
+    {
+      "id": "b1",
+      "enabled": true,
+      "icon": "🎉",
+      "title": "Buy & Get 3 Refills FREE",
+      "subtitle": "Limited-time offer on our 19L bottled drinking water. Stock up and save!",
+      "cta": "ORDER NOW",
+      "link": "https://wa.me/923298435156",
+      "color1": "#14233e",
+      "color2": "#4b5662"
+    },
+    {
+      "id": "b2",
+      "enabled": true,
+      "icon": "🚚",
+      "title": "FREE Delivery in Bahria Town Lahore",
+      "subtitle": "Fresh 19L bottles delivered right to your doorstep — no extra charges.",
+      "cta": "Order Now",
+      "link": "https://wa.me/923298435156",
+      "color1": "#11296e",
+      "color2": "#1c4fb0"
+    },
+    {
+      "id": "b3",
+      "enabled": true,
+      "icon": "💪",
+      "title": "Drink With Confidence",
+      "subtitle": "RO-treated, mineral-balanced water from a deep underground source. Your health deserves the best.",
+      "cta": "Learn More",
+      "link": "#analysis",
+      "color1": "#2f86e0",
+      "color2": "#0fb6a8"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pure Sip — Admin · Promo Banners</title>
+<link rel="icon" href="/img/logo.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#0a6fd1;--blue-light:#22a7f0;--teal:#0fb6a8;--ink:#0c2a43;--muted:#5b7891}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Poppins',system-ui,sans-serif}
+body{background:#eef7ff;color:var(--ink);min-height:100vh}
+.topbar{background:linear-gradient(90deg,var(--blue),var(--teal));color:#fff;padding:16px 22px;display:flex;align-items:center;justify-content:space-between}
+.topbar .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+.topbar img{width:34px;height:34px}
+.topbar a{color:#fff;opacity:.9;font-size:.9rem}
+.wrap{max-width:1000px;margin:30px auto;padding:0 18px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:none;border-radius:10px;padding:11px 18px;font-weight:600;cursor:pointer;font-size:.95rem;transition:.2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:linear-gradient(90deg,var(--blue),var(--blue-light));color:#fff}
+.btn-add{background:#e8f5ff;color:var(--blue)}
+.btn-del{background:#ffecec;color:#d33;padding:8px 12px}
+.btn-save{background:linear-gradient(90deg,#1faf4b,#25d366);color:#fff;font-size:1.05rem;padding:14px 28px}
+
+/* login */
+.login{max-width:380px;margin:90px auto;background:#fff;border-radius:18px;padding:34px;box-shadow:0 18px 40px rgba(10,111,209,.16);text-align:center}
+.login img{width:64px;height:64px;margin-bottom:12px}
+.login h2{margin-bottom:6px}.login p{color:var(--muted);margin-bottom:20px;font-size:.9rem}
+input,textarea{width:100%;padding:11px 13px;border:1.5px solid #d7e8f7;border-radius:10px;font-size:.95rem;margin-top:6px;background:#fbfdff}
+input:focus,textarea:focus{outline:none;border-color:var(--blue-light)}
+label{font-size:.82rem;font-weight:600;color:var(--muted);display:block;margin-top:12px}
+.err{color:#d33;font-size:.85rem;margin-top:10px;min-height:18px}
+
+.panel{background:#fff;border-radius:16px;padding:24px;box-shadow:0 12px 30px rgba(10,111,209,.08);margin-bottom:22px}
+.panel h3{margin-bottom:4px}.panel .hint{color:var(--muted);font-size:.85rem;margin-bottom:14px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.switch{display:flex;align-items:center;gap:10px;margin-top:14px}
+.switch input{width:auto}
+
+.banner-card{border:1.5px solid #e3eefb;border-radius:14px;padding:18px;margin-bottom:16px;position:relative;background:#fbfdff}
+.banner-card .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.banner-card .head b{font-size:.95rem}
+.preview{border-radius:12px;padding:18px 20px;color:#fff;margin-top:12px;display:flex;align-items:center;gap:14px;overflow:hidden;position:relative}
+.preview .pic{font-size:2rem}
+.preview h4{font-size:1.1rem}.preview p{font-size:.85rem;opacity:.92}
+.preview .tag{margin-left:auto;background:#fff;color:#0c2a43;padding:7px 14px;border-radius:999px;font-weight:600;font-size:.8rem;white-space:nowrap}
+.colors{display:flex;gap:14px;align-items:flex-end}
+.colors>div{flex:1}
+input[type=color]{height:42px;padding:4px;cursor:pointer}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:10px;flex-wrap:wrap}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(120px);background:#0c2a43;color:#fff;padding:14px 26px;border-radius:12px;font-weight:600;transition:.4s;box-shadow:0 12px 30px rgba(0,0,0,.3);z-index:99}
+.toast.show{transform:translateX(-50%) translateY(0)}
+@media(max-width:640px){.row,.colors{grid-template-columns:1fr;flex-direction:column}}
+</style>
+</head>
+<body>
+
+<div id="loginView">
+  <div class="login">
+    <img src="/img/logo.svg" alt="">
+    <h2>Pure Sip Admin</h2>
+    <p>Enter your password to manage promotion banners.</p>
+    <input type="password" id="pw" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()">
+    <div class="err" id="loginErr"></div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:14px" onclick="doLogin()">Log In</button>
+  </div>
+</div>
+
+<div id="adminView" style="display:none">
+  <div class="topbar">
+    <div class="brand"><img src="/img/logo.svg" alt=""> Pure Sip · Admin</div>
+    <div style="display:flex;gap:18px;align-items:center">
+      <a href="/" target="_blank">View site ↗</a>
+      <a href="#" onclick="logout();return false">Log out</a>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="panel">
+      <h3>Top Announcement Bar</h3>
+      <p class="hint">The thin colored strip at the very top of the website.</p>
+      <div class="switch"><input type="checkbox" id="topEnabled"><label style="margin:0">Show announcement bar</label></div>
+      <label>Announcement headlines — one per line (they scroll across like a news ticker)</label>
+      <textarea id="topText" rows="4" placeholder="💧 FREE Delivery in Bahria Town — Order today!&#10;🎉 Buy & Get 3 Refills FREE&#10;📞 Call or WhatsApp 0329 843 5156"></textarea>
+      <label>Banner rotation speed (seconds)</label>
+      <input type="number" id="rotate" min="2" max="30" style="max-width:160px">
+    </div>
+
+    <div class="panel">
+      <div class="bar">
+        <div><h3>Promotion Banners</h3><p class="hint" style="margin:0">Colorful animated banners shown on the homepage. They rotate automatically.</p></div>
+        <button class="btn btn-add" onclick="addBanner()">＋ Add Banner</button>
+      </div>
+      <div id="bannerList" style="margin-top:16px"></div>
+    </div>
+
+    <div class="bar" style="justify-content:flex-end">
+      <span class="err" id="saveErr" style="margin-right:auto"></span>
+      <button class="btn btn-save" onclick="save()">💾 Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="/js/admin.js"></script>
+</body>
+</html>
