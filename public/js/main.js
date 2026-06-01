@@ -181,3 +181,28 @@ function escapeHtml(s) {
 }
 
 loadBanners();
+
+// ---------- Comic reader modal ----------
+(function () {
+  const modal = document.getElementById('comicModal');
+  const openBtn = document.getElementById('readComicBtn');
+  if (!modal || !openBtn) return;
+  const frame = modal.querySelector('.comic-frame');
+  let loaded = false;
+
+  function open() {
+    if (!loaded) { frame.src = frame.dataset.comicSrc; loaded = true; } // lazy-load on first open
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('comic-open');
+  }
+  function close() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('comic-open');
+  }
+
+  openBtn.addEventListener('click', open);
+  modal.querySelectorAll('[data-comic-close]').forEach(el => el.addEventListener('click', close));
+  addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) close(); });
+})();
