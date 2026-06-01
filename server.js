@@ -70,6 +70,12 @@ app.get('/admin', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
-app.listen(PORT, () => {
-  console.log(`Pure Sip running at http://localhost:${PORT}  (admin: /admin)`);
-});
+// Run a real listener only when started directly (local dev).
+// On Vercel the app is imported and invoked as a serverless function.
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Pure Sip running at http://localhost:${PORT}  (admin: /admin)`);
+  });
+}
+
+module.exports = app;
