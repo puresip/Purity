@@ -190,11 +190,26 @@ loadBanners();
   const frame = modal.querySelector('.comic-frame');
   let loaded = false;
 
+  function load() { if (!loaded) { frame.src = frame.dataset.comicSrc; loaded = true; } }
+
+  // reset to the cover (page 0) and refit once the comic engine is ready
+  function resetToCover(tries) {
+    tries = tries || 0;
+    const w = frame.contentWindow;
+    if (w && typeof w.go === 'function') { w.go(0); if (typeof w.fit === 'function') w.fit(); return; }
+    if (tries < 60) setTimeout(() => resetToCover(tries + 1), 50); // wait for unpack (~3s max)
+  }
+
+  // preload in the background so the first open is instant (no "unpacking" flash)
+  if ('requestIdleCallback' in window) requestIdleCallback(load, { timeout: 3000 });
+  else setTimeout(load, 1500);
+
   function open() {
-    if (!loaded) { frame.src = frame.dataset.comicSrc; loaded = true; } // lazy-load on first open
+    load();
     modal.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('comic-open');
+    resetToCover(); // always start on the cover
   }
   function close() {
     modal.classList.remove('open');
